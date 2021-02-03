@@ -41,6 +41,7 @@ class Article(models.Model):
     class Meta:
         verbose_name="مقاله"
         verbose_name_plural="مقالات"
+        ordering=['published']
     def jpublished(self):
         return jalali_converter(self.published)
 
