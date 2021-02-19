@@ -34,8 +34,8 @@
 <!--                    <a href="#">Start Bootstrap</a>-->
                     {{ article.jpublished }}</p>
                     <div>
-                        {% for cat in article.category.all %}
-                        <a href="#">{{cat.title}}</a>
+                        {% for cat in article.category_published.all %}
+                        <a href="{% url 'first_app:category' cat.slug %}">{{cat.title}}</a>
                         {% endfor %}
                     </div>
             </div>

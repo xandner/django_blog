@@ -34,7 +34,7 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now=True,verbose_name='زمان ساخت')
     updated = models.DateTimeField(auto_now=True,verbose_name='زمان ویرایش')
     status = models.CharField(max_length=1, choices=choises,verbose_name='وضعیت')
-    category=models.ManyToManyField(Category,verbose_name='دسته بندی')
+    category=models.ManyToManyField(Category,verbose_name='دسته بندی',related_name='articles')
     
     def __str__(self):
         return self.title
@@ -46,5 +46,8 @@ class Article(models.Model):
         return jalali_converter(self.published)
 
     jpublished.short_description='زمان انتشار'
+
+    def category_published(self):
+        return self.category.filter(status=True)
 
     
