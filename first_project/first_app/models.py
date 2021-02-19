@@ -2,7 +2,10 @@ from django.db import models
 from django.utils import timezone
 from extensions.utils import jalali_converter
 
-
+#managers
+class ArticleManager(models.Manager):
+    def published(self):
+        return self.filter(status="p")
 
 class Category(models.Model):
     title=models.CharField(max_length=255,verbose_name='عنوان دسته بندی')
@@ -51,3 +54,4 @@ class Article(models.Model):
         return self.category.filter(status=True)
 
     
+    objects=ArticleManager()
