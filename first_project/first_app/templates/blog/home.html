@@ -43,7 +43,13 @@
             {% endfor %}
             <!-- Pager -->
             <div class="clearfix pager-bottom">
-                <a class="btn btn-primary float-right" href="#">  نمایش پست های قدیمی &larr;</a>
+                {% if articles.has_next %}
+                    <a class="btn btn-primary float-right ml-3" href="{% url 'first_app:test_app' articles.next_page_number %}"> &rarr;  نمایش پست های جدید</a>
+                {% endif %}
+
+                {% if articles.has_previous %}
+                    <a class="btn btn-primary float-right" href="{% url 'first_app:test_app' articles.previous_page_number %}"> &larr; نمایش پست های قدیمی </a>
+                {% endif %}
             </div>
         </div>
     </div>

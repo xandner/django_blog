@@ -1,3 +1,5 @@
+from django.core.paginator import Paginator
+
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse, JsonResponse,Http404
 from .models import Article,Category
@@ -6,9 +8,12 @@ from .models import Article,Category
 
 # Create your views here.
 
-def home(request):
+def home(request,page=1):
+    articles_list=Article.objects.published()
+    paginator=Paginator(articles_list,2)
+    articles=paginator.get_page(page)
     context = {
-        'articles': Article.objects.published(),
+        'articles': articles,
     }
     return render(request, "blog/home.html", context=context)
 
