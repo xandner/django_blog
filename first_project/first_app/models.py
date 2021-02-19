@@ -8,6 +8,7 @@ class ArticleManager(models.Manager):
         return self.filter(status="p")
 
 class Category(models.Model):
+    parent=models.ForeignKey('self',default=None,null=True,blank=True,on_delete=models.SET_NULL,related_name='children',verbose_name='زیر دسته')
     title=models.CharField(max_length=255,verbose_name='عنوان دسته بندی')
     slug=models.SlugField(max_length=255,unique=True,verbose_name='آدرس دسته بندی')
     status=models.BooleanField(default=True,verbose_name='نمایش داده شود؟')
@@ -16,7 +17,7 @@ class Category(models.Model):
     class Meta:
         verbose_name="دسته بندی"
         verbose_name_plural="دسته بندی ها"
-        ordering=['position']
+        ordering=['-parent__id','-position']
 
     def __str__(self):
         return self.title
@@ -44,7 +45,7 @@ class Article(models.Model):
     class Meta:
         verbose_name="مقاله"
         verbose_name_plural="مقالات"
-        ordering=['published']
+        ordering=['-published']
     def jpublished(self):
         return jalali_converter(self.published)
 
