@@ -2,7 +2,7 @@
 {% load static %}
 {% block main %}
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('{% static "blog/img/home-bg.jpg" %}')">
+<header class="masthead" style="background-image: url('{% static " blog/img/home-bg.jpg" %}')">
 <div class="overlay"></div>
 <div class="container">
     <div class="row">
@@ -21,34 +21,38 @@
         <div class="col-lg-8 col-md-10 mx-auto">
             <h3 class="alert alert-primary text-center">دسته بندی: {{ category.title }}</h3>
             {% for article in category.articles.published %}
-                <div class="post-preview">
+            <div class="post-preview">
                 <a href="{% url 'first_app:detail' article.slog %}">
                     <h2 class="post-title">
                         {{ article.title }}
                     </h2>
                     <h3 class="post-subtitle">
-                       {{ article.description|truncatewords:20 }}
+                        {{ article.description|truncatewords:20 }}
                     </h3>
                 </a>
                 <p class="post-meta">نوشته شده توسط:
-<!--                    <a href="#">Start Bootstrap</a>-->
+                    <!--                    <a href="#">Start Bootstrap</a>-->
                     {{ article.jpublished }}</p>
-                    <div>
-                        {% for cat in article.category_published.published %}
-                        <a href="{% url 'first_app:category' cat.slug %}">{{cat.title}}</a>
-                        {% endfor %}
-                    </div>
+                <div>
+                    {% for cat in article.category_published.published %}
+                    <a href="{% url 'first_app:category' cat.slug %}">{{cat.title}}</a>
+                    {% endfor %}
+                </div>
             </div>
             <hr>
             {% endfor %}
             <!-- Pager -->
             <div class="clearfix pager-bottom">
                 {% if articles.has_next %}
-                    <a class="btn btn-primary float-right ml-3" href="{% url 'first_app:category' category.slug articles.next_page_number %}"> &rarr;  نمایش پست های قدیمی</a>
+                <a class="btn btn-primary float-right ml-3"
+                   href="{% url 'first_app:category' category.slug articles.next_page_number %}"> &rarr; نمایش پست های
+                    قدیمی</a>
                 {% endif %}
 
                 {% if articles.has_previous %}
-                    <a class="btn btn-primary float-right" href="{% url 'first_app:category' category.slug articles.previous_page_number %}"> &larr; نمایش پست های جدید </a>
+                <a class="btn btn-primary float-right"
+                   href="{% url 'first_app:category' category.slug articles.previous_page_number %}"> &larr; نمایش پست
+                    های جدید </a>
                 {% endif %}
             </div>
         </div>

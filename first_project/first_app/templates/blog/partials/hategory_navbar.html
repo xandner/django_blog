@@ -4,9 +4,14 @@
             <a class="nav-link" href="{% url 'first_app:test_app' %}">خانه</a>
         </li>
         {% for cat in category %}
+        {% if cat.parent == none %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'first_app:category' cat.slug %}">{{ cat.title }}</a>
+            {% if cat.children.all %}
+                {% include 'blog/partials/category_loop.html' %}
+            {% endif %}
         </li>
+        {% endif %}
         {% endfor %}
 
     </ul>
